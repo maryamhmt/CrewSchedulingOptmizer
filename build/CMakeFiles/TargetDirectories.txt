@@ -1,0 +1,3 @@
+/Users/maryamhemmati/CrewSchedulingOptimizer/build/CMakeFiles/CrewSchedulingOptimizer.dir
+/Users/maryamhemmati/CrewSchedulingOptimizer/build/CMakeFiles/edit_cache.dir
+/Users/maryamhemmati/CrewSchedulingOptimizer/build/CMakeFiles/rebuild_cache.dir

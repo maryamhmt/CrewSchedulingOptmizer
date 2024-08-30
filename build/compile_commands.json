@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/Users/maryamhemmati/CrewSchedulingOptimizer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/maryamhemmati/CrewSchedulingOptimizer/include -I/usr/local/opt/or-tools/include -I/usr/local/include -g -std=gnu++14 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/CrewSchedulingOptimizer.dir/src/main.cpp.o -c /Users/maryamhemmati/CrewSchedulingOptimizer/src/main.cpp",
+  "file": "/Users/maryamhemmati/CrewSchedulingOptimizer/src/main.cpp",
+  "output": "CMakeFiles/CrewSchedulingOptimizer.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/maryamhemmati/CrewSchedulingOptimizer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/maryamhemmati/CrewSchedulingOptimizer/include -I/usr/local/opt/or-tools/include -I/usr/local/include -g -std=gnu++14 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/CrewSchedulingOptimizer.dir/src/CrewMember.cpp.o -c /Users/maryamhemmati/CrewSchedulingOptimizer/src/CrewMember.cpp",
+  "file": "/Users/maryamhemmati/CrewSchedulingOptimizer/src/CrewMember.cpp",
+  "output": "CMakeFiles/CrewSchedulingOptimizer.dir/src/CrewMember.cpp.o"
+},
+{
+  "directory": "/Users/maryamhemmati/CrewSchedulingOptimizer/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/maryamhemmati/CrewSchedulingOptimizer/include -I/usr/local/opt/or-tools/include -I/usr/local/include -g -std=gnu++14 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -o CMakeFiles/CrewSchedulingOptimizer.dir/src/CrewScheduling.cpp.o -c /Users/maryamhemmati/CrewSchedulingOptimizer/src/CrewScheduling.cpp",
+  "file": "/Users/maryamhemmati/CrewSchedulingOptimizer/src/CrewScheduling.cpp",
+  "output": "CMakeFiles/CrewSchedulingOptimizer.dir/src/CrewScheduling.cpp.o"
+}
+]
