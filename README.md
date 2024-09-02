@@ -1,7 +1,3 @@
-# Crew Scheduling Problem
-
-**Maryam Hemmati**  
-**Date:** \today  
 **Title:** Crew Scheduling Problem
 
 ## Flight Scheduling
