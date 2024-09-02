@@ -31,16 +31,16 @@ You are responsible for building new schedules for pilots using pre-generated fl
 ### Parameters
 
 - $R_s, R_e$: Integer parameters representing the start time and end time (in minutes from 01.01.1970) of the period for schedule generation. The assumption is that all flights, pairings, and schedules are contained within this period.
-- \( C \): Set of crew (pilots).
-- \( F \): Set of non-canceled flights.
-- \( P \): Set of pairings generated from flights \( F \).
-- \( p_{if} \): Binary coefficient, where \( p_{if} = 1 \) if and only if pairing \( i \) includes flight \( f \).
-- \( s_{ic} \): Binary coefficient, where \( s_{ic} = 1 \) if and only if pairing \( i \) was in the original schedule of crew \( c \).
-- \( s_i, e_i \): Integer coefficients representing the start time and end time (in minutes from 01.01.1970) of pairing \( i \).
-- \( C_u \): Cost of an unassigned flight.
-- \( C_a \): Cost of assigning a pairing that was not in the original plan.
-- \( C_d \): Cost of deassigning a pairing that was in the original plan.
-- \( C_m \): Unit cost if the pilot's original schedule was modified.
+- $C$: Set of crew (pilots).
+- $F$: Set of non-canceled flights.
+- $P$: Set of pairings generated from flights $F$.
+- $p_{if}$: Binary coefficient, where $p_{if} = 1$ if and only if pairing $i$ includes flight $f$.
+- $s_{ic}$: Binary coefficient, where $s_{ic} = 1$ if and only if pairing $i$ was in the original schedule of crew $c$.
+- $s_i, e_i$: Integer coefficients representing the start time and end time (in minutes from 01.01.1970) of pairing $i$.
+- $C_u$: Cost of an unassigned flight.
+- $C_a$: Cost of assigning a pairing that was not in the original plan.
+- $C_d$: Cost of deassigning a pairing that was in the original plan.
+- $C_m$: Unit cost if the pilot's original schedule was modified.
 
 ### Tasks
 
@@ -50,7 +50,7 @@ You are responsible for building new schedules for pilots using pre-generated fl
 
 ### Decision Variables
 
-- \( x_{ic} \) is defined as:
+- $x_{ic}$ is defined as:
   $$
   x_{ic} =
   \begin{cases} 
@@ -59,7 +59,7 @@ You are responsible for building new schedules for pilots using pre-generated fl
   \end{cases}
   $$
 
-- \( y_c \) is defined as:
+- $y_c$ is defined as:
   $$
   y_c =
   \begin{cases} 
@@ -68,7 +68,7 @@ You are responsible for building new schedules for pilots using pre-generated fl
   \end{cases}
   $$
 
-- \( z_c \) is defined as:
+- $z_c$ is defined as:
   $$
   z_c =
   \begin{cases} 
@@ -77,69 +77,77 @@ You are responsible for building new schedules for pilots using pre-generated fl
   \end{cases}
   $$
 
-
-
 ##### Objective Function
 
-\[
+$$
 \min \left( \sum_{f \in F} C_u \cdot \left(1 - \sum_{i \in P} \sum_{c \in C} \alpha_{if} x_{ic}\right) + \sum_{i \in P} \sum_{c \in C} C_a \cdot (1 - s_{ic}) x_{ic} + \sum_{i \in P} \sum_{c \in C} C_d \cdot s_{ic} (1 - x_{ic}) + \sum_{c \in C} C_m \cdot y_c \right)
-\]
+$$
+
 
 ##### Constraints
 
 1. **Flight Coverage:**
 
-\[
+$$
 \sum_{i \in P} \sum_{c \in C} \alpha_{if} x_{ic} \leq 1, \quad \forall f \in F
-\]
+$$
+
 
 2. **Crew Assignment:**
 
-\[
+$$
 x_{ic} + x_{jc} \leq 1, \quad \forall c \in C, \forall i, j \in P \text{ where } [s_i, e_i] \cap [s_j, e_j] \neq \emptyset
-\]
+$$
+
 
 3. **Rest Periods:**
 
-\[
+$$
 e_i x_{ic} + 600 \leq s_j x_{jc} + M(2 - x_{ic} - x_{jc}), \quad \forall c \in C, \forall i, j \in P \text{ where } e_i < s_j
-\]
+$$
+
 
 4. **Cleared Schedules:**
 
-\[
+$$
 \sum_{c \in C} z_c \geq \lceil 0.2 \cdot |C| \rceil
-\]
+$$
+
 
 5. **No Pairings for Cleared Crews:**
 
-\[
+$$
 \sum_{i \in P} x_{ic} \leq M(1 - z_c), \quad \forall c \in C
-\]
+$$
+
 
 6. **Schedule Modification Definition:**
 
-\[
+$$
 y_c \geq x_{ic} - s_{ic}, \quad \forall c \in C, \forall i \in P
-\]
+$$
 
-\[
+
+$$
 y_c \geq s_{ic} - x_{ic}, \quad \forall c \in C, \forall i \in P
-\]
+$$
+
 
 ##### Binary Constraints
 
-\[
+$$
 x_{ic}, y_c, z_c \in \{0, 1\}, \quad \forall c \in C, \forall i \in P
-\]
+$$
+
 
 ### Additional Considerations
 
 - **Two Pilots on a Flight:**
 
-\[
+$$
 \sum_{i \in P} \sum_{c \in C} \alpha_{if} x_{ic} \leq 2, \quad \forall f \in F
-\]
+$$
+
 
 - **Solving the Model:**
 
@@ -147,11 +155,8 @@ To efficiently solve this model with a large set of possible pairings, I would s
 
 For more complex scenarios, I might consider **Branch-and-Price**, **Heuristics**, or even **Parallel Computing** on a GPU.
 
-**Note:** I am currently writing C++ code for this model and solving it using OR-Tools. You can watch my progress on my [GitHub repository](https://github.com/maryamhmt/CrewSchedulingOptimizer).
 
- To compile:
- 
- g++ -std=c++17 -I/usr/local/opt/or-tools/include -I/usr/local/include -Iinclude -L/usr/local/opt/or-tools/lib -L/usr/local/Cellar/abseil/20240722.0/lib -L/usr/local/lib -lortools -labsl_base -labsl_cord -labsl_strings -labsl_synchronization -labsl_time -lprotobuf src/main.cpp src/CrewScheduling.cpp -o CrewSchedulingOptimizer
+To compile:
 
-To run:
- ./CrewSchedulingOptimizer
+```bash
+g++ -std=c++17 -I/usr/local/opt/or-tools/include -I/usr/local/include -Iinclude -L/usr/local/opt/or-tools/lib -L/usr/local/Cellar/abseil/20240722.0/lib -L/usr/local/lib -lortools -labsl_base -labsl_cord -labsl_strings -labsl_synchronization -labsl_time -lprotobuf src/main.cpp src/CrewScheduling.cpp -o CrewSchedulingOptimizer
