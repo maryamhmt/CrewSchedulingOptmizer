@@ -81,6 +81,11 @@ $$
 \sum_{i \in P} \sum_{c \in C} \alpha_{if} x_{ic} \leq 1, \quad \forall f \in F
 $$
 
+$$
+\sum_{c \in C}x_{ic} \geq \alpha_{if} , \quad \forall f \in F, i \in P
+$$
+
+The second constraint can be removed, it's just to avoid assigning a flight to a pairing and leave it.
 
 2. **Crew Assignment:**
 
