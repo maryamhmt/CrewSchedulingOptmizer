@@ -52,30 +52,24 @@ You are responsible for building new schedules for pilots using pre-generated fl
 
 - $x_{ic}$ is defined as:
 
-  <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=x_{ic} = \begin{cases} 
-  1 & \text{if pairing } i \text{ is assigned to crew } c, \\ 
-  0 & \text{otherwise.} 
-  \end{cases}">
-  </p>
+| Value | Condition |
+|:-----:|:----------|
+|   1   | if pairing $i$ is assigned to crew $c$ |
+|   0   | otherwise |
 
 - $y_c$ is defined as:
 
-  <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=y_{c} = \begin{cases} 
-  1 & \text{if crew } c \text{'s schedule is modified,} \\ 
-  0 & \text{otherwise.} 
-  \end{cases}">
-  </p>
+| Value | Condition |
+|:-----:|:----------|
+|   1   | if crew $c$'s schedule is modified |
+|   0   | otherwise |
 
 - $z_c$ is defined as:
 
-  <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=z_{c} = \begin{cases} 
-  1 & \text{if crew } c \text{'s schedule is cleared,} \\ 
-  0 & \text{otherwise.} 
-  \end{cases}">
-  </p>
+| Value | Condition |
+|:-----:|:----------|
+|   1   | if crew $c$'s schedule is cleared |
+|   0   | otherwise |
 ##### Objective Function
 
 $$
