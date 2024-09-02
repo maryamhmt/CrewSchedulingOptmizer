@@ -4,6 +4,7 @@
 #include "CrewScheduling.h"
 #include "ortools/linear_solver/linear_solver.h"
 
+//defining the parameters 
 void CrewScheduling::setPairings(const std::vector<Pairing>& pairings) {
     this->pairings = pairings;
 }
@@ -19,6 +20,7 @@ void CrewScheduling::setTimeRange(int start, int end) {
     this->timeRangeStart = start;
     this->timeRangeEnd = end;
 }
+
 
 void CrewScheduling::optimizeSchedule() {
     std::cout << "Starting schedule optimization..." << std::endl;
