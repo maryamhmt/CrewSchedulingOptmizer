@@ -30,7 +30,7 @@ You are responsible for building new schedules for pilots using pre-generated fl
 
 ### Parameters
 
-- \( R_s, R_e \): Integer parameters representing the start time and end time (in minutes from 01.01.1970) of the period for schedule generation. The assumption is that all flights, pairings, and schedules are contained within this period.
+- $R_s, R_e$: Integer parameters representing the start time and end time (in minutes from 01.01.1970) of the period for schedule generation. The assumption is that all flights, pairings, and schedules are contained within this period.
 - \( C \): Set of crew (pilots).
 - \( F \): Set of non-canceled flights.
 - \( P \): Set of pairings generated from flights \( F \).
@@ -51,31 +51,32 @@ You are responsible for building new schedules for pilots using pre-generated fl
 ### Decision Variables
 
 - \( x_{ic} \) is defined as:
-  \[
+  $$
   x_{ic} =
   \begin{cases} 
-  1 & \text{if pairing \( i \) is assigned to crew \( c \),} \\ 
+  1 & \text{if pairing } i \text{ is assigned to crew } c, \\ 
   0 & \text{otherwise.} 
   \end{cases}
-  \]
+  $$
 
 - \( y_c \) is defined as:
-  \[
+  $$
   y_c =
   \begin{cases} 
-  1 & \text{if crew \( c \)'s schedule is modified,} \\ 
+  1 & \text{if crew } c \text{'s schedule is modified,} \\ 
   0 & \text{otherwise.} 
   \end{cases}
-  \]
+  $$
 
 - \( z_c \) is defined as:
-  \[
+  $$
   z_c =
   \begin{cases} 
-  1 & \text{if crew \( c \)'s schedule is cleared,} \\ 
+  1 & \text{if crew } c \text{'s schedule is cleared,} \\ 
   0 & \text{otherwise.} 
   \end{cases}
-  \]
+  $$
+
 
 
 ##### Objective Function
