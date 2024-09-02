@@ -48,31 +48,35 @@ You are responsible for building new schedules for pilots using pre-generated fl
 
 #### Model Formulation
 
-##### Decision Variables
+### Decision Variables
 
-\[
-x_{ic} =
-\begin{cases}
-1 & \text{if pairing $i$ is assigned to crew $c$,} \\
-0 & \text{otherwise.}
-\end{cases}
-\]
+- \( x_{ic} \) is defined as:
+  \[
+  x_{ic} =
+  \begin{cases} 
+  1 & \text{if pairing \( i \) is assigned to crew \( c \),} \\ 
+  0 & \text{otherwise.} 
+  \end{cases}
+  \]
 
-\[
-y_c =
-\begin{cases}
-1 & \text{if crew $c$'s schedule is modified,} \\
-0 & \text{otherwise.}
-\end{cases}
-\]
+- \( y_c \) is defined as:
+  \[
+  y_c =
+  \begin{cases} 
+  1 & \text{if crew \( c \)'s schedule is modified,} \\ 
+  0 & \text{otherwise.} 
+  \end{cases}
+  \]
 
-\[
-z_c =
-\begin{cases}
-1 & \text{if crew $c$'s schedule is cleared,} \\
-0 & \text{otherwise.}
-\end{cases}
-\]
+- \( z_c \) is defined as:
+  \[
+  z_c =
+  \begin{cases} 
+  1 & \text{if crew \( c \)'s schedule is cleared,} \\ 
+  0 & \text{otherwise.} 
+  \end{cases}
+  \]
+
 
 ##### Objective Function
 
