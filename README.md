@@ -69,7 +69,7 @@ You are responsible for building new schedules for pilots using pre-generated fl
 ##### Objective Function
 
 $$
-\min \left( \sum_{f \in F} C_u \cdot \left(1 - \sum_{i \in P} \sum_{c \in C} \alpha_{if} x_{ic}\right) + \sum_{i \in P} \sum_{c \in C} C_a \cdot (1 - s_{ic}) x_{ic} + \sum_{i \in P} \sum_{c \in C} C_d \cdot s_{ic} (1 - x_{ic}) + \sum_{c \in C} C_m \cdot y_c \right)
+\min \left( \sum_{f \in F} C_u \cdot \left(1 - \sum_{i \in P} \sum_{c \in C} p_{if} x_{ic}\right) + \sum_{i \in P} \sum_{c \in C} C_a \cdot (1 - s_{ic}) x_{ic} + \sum_{i \in P} \sum_{c \in C} C_d \cdot s_{ic} (1 - x_{ic}) + \sum_{c \in C} C_m \cdot y_c \right)
 $$
 
 
@@ -78,11 +78,11 @@ $$
 1. **Flight Coverage:**
 
 $$
-\sum_{i \in P} \sum_{c \in C} \alpha_{if} x_{ic} \leq 1, \quad \forall f \in F
+\sum_{i \in P} \sum_{c \in C} \p_{if} x_{ic} \leq 1, \quad \forall f \in F
 $$
 
 $$
-\sum_{c \in C}x_{ic} \geq \alpha_{if} , \quad \forall f \in F, i \in P
+\sum_{c \in C}x_{ic} \geq \p_{if} , \quad \forall f \in F, i \in P
 $$
 
 The second constraint can be removed, it's just to avoid assigning a flight to a pairing and leave it.
@@ -139,7 +139,7 @@ $$
 - **Two Pilots on a Flight:**
 
 $$
-\sum_{i \in P} \sum_{c \in C} \alpha_{if} x_{ic} \leq 2, \quad \forall f \in F
+\sum_{i \in P} \sum_{c \in C} \p_{if} x_{ic} \leq 2, \quad \forall f \in F
 $$
 
 
