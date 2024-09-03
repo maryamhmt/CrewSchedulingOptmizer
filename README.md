@@ -81,6 +81,7 @@ $$
 \sum_{i \in P} \sum_{c \in C} p_{if} x_{ic} \leq 1, \quad \forall f \in F
 $$
 
+
 $$
 \sum_{c \in C}x_{ic} \geq p_{if} , \quad \forall f \in F, i \in P
 $$
@@ -89,12 +90,14 @@ The second constraint can be removed, it's just to avoid assigning a flight to a
 
 2. **Crew Assignment:**
 
+
 $$
 x_{ic} + x_{jc} \leq 1, \quad \forall c \in C, \forall i, j \in P \text{ where } [s_i, e_i] \cap [s_j, e_j] \neq \emptyset
 $$
 
 
 3. **Rest Periods:**
+
 
 $$
 e_i x_{ic} + 600 \leq s_j x_{jc} + M(2 - x_{ic} - x_{jc}), \quad \forall c \in C, \forall i, j \in P \text{ where } e_i < s_j
@@ -103,12 +106,14 @@ $$
 
 4. **Cleared Schedules:**
 
+
 $$
 \sum_{c \in C} z_c \geq \lceil 0.2 \cdot |C| \rceil
 $$
 
 
 5. **No Pairings for Cleared Crews:**
+
 
 $$
 \sum_{i \in P} x_{ic} \leq M(1 - z_c), \quad \forall c \in C
