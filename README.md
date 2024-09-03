@@ -66,7 +66,6 @@ You are responsible for building new schedules for pilots using pre-generated fl
 |:-----:|:----------|
 |   1   | if crew $c$'s schedule is cleared |
 |   0   | otherwise |
-
 ##### Objective Function
 
 $$
@@ -78,43 +77,55 @@ $$
 
 1. **Flight Coverage:**
 
-   $$
-   \sum_{i \in P} \sum_{c \in C} p_{if} x_{ic} \leq 1, \quad \forall f \in F
-   $$
+$$
+\sum_{i \in P} \sum_{c \in C} p_{if} x_{ic} \leq 1, \quad \forall f \in F
+$$
+
+$$
+\sum_{c \in C}x_{ic} \geq p_{if} , \quad \forall f \in F, i \in P
+$$
+
+The second constraint can be removed, it's just to avoid assigning a flight to a pairing and leave it.
 
 2. **Crew Assignment:**
 
-   $$
-   x_{ic} + x_{jc} \leq 1, \quad \forall c \in C, \forall i, j \in P \text{ where } [s_i, e_i] \cap [s_j, e_j] \neq \emptyset
-   $$
+$$
+x_{ic} + x_{jc} \leq 1, \quad \forall c \in C, \forall i, j \in P \text{ where } [s_i, e_i] \cap [s_j, e_j] \neq \emptyset
+$$
+
 
 3. **Rest Periods:**
 
-   $$
-   e_i x_{ic} + 600 \leq s_j x_{jc} + M(2 - x_{ic} - x_{jc}), \quad \forall c \in C, \forall i, j \in P \text{ where } e_i < s_j
-   $$
+$$
+e_i x_{ic} + 600 \leq s_j x_{jc} + M(2 - x_{ic} - x_{jc}), \quad \forall c \in C, \forall i, j \in P \text{ where } e_i < s_j
+$$
+
 
 4. **Cleared Schedules:**
 
-   $$
-   \sum_{c \in C} z_c \geq \lceil 0.2 \cdot |C| \rceil
-   $$
+$$
+\sum_{c \in C} z_c \geq \lceil 0.2 \cdot |C| \rceil
+$$
+
 
 5. **No Pairings for Cleared Crews:**
 
-   $$
-   \sum_{i \in P} x_{ic} \leq M(1 - z_c), \quad \forall c \in C
-   $$
+$$
+\sum_{i \in P} x_{ic} \leq M(1 - z_c), \quad \forall c \in C
+$$
+
 
 6. **Schedule Modification Definition:**
 
-   $$
-   y_c \geq x_{ic} - s_{ic}, \quad \forall c \in C, \forall i \in P
-   $$
+$$
+y_c \geq x_{ic} - s_{ic}, \quad \forall c \in C, \forall i \in P
+$$
 
-   $$
-   y_c \geq s_{ic} - x_{ic}, \quad \forall c \in C, \forall i \in P
-   $$
+
+$$
+y_c \geq s_{ic} - x_{ic}, \quad \forall c \in C, \forall i \in P
+$$
+
 
 ##### Binary Constraints
 
@@ -127,11 +138,11 @@ $$
 
 - **Two Pilots on a Flight:**
 
-   $$
-   \sum_{i \in P} \sum_{c \in C} p_{if} x_{ic} \leq 2, \quad \forall f \in F
-   $$
+$$
+\sum_{i \in P} \sum_{c \in C} p_{if} x_{ic} \leq 2, \quad \forall f \in F
+$$
 
-## Model Formulation2 (Linear Objective Function)
+## Model Formulation2(Linear Obective function)
 
 ### Decision Variables
 
@@ -154,53 +165,44 @@ $$
 ### Constraints
 
 1. **Flight Coverage:**
-
    $$
    \sum_{i \in P} \sum_{c \in C} p_{if} x_{ic} \leq 1, \quad \forall f \in F
    $$
 
 2. **Crew Assignment:**
-
    $$
    x_{ic} + x_{jc} \leq 1, \quad \forall c \in C, \forall i, j \in P \text{ where } [s_i, e_i] \cap [s_j, e_j] \neq \emptyset
    $$
 
 3. **Rest Periods:**
-
    $$
    e_i x_{ic} + 600 \leq s_j x_{jc} + M(2 - x_{ic} - x_{jc}), \quad \forall c \in C, \forall i, j \in P \text{ where } e_i < s_j
    $$
 
 4. **Cleared Schedules:**
-
    $$
    \sum_{c \in C} z_c \geq \lceil 0.2 \cdot |C| \rceil
    $$
 
 5. **No Pairings for Cleared Crews:**
-
    $$
    \sum_{i \in P} x_{ic} \leq M(1 - z_c), \quad \forall c \in C
    $$
 
 6. **Schedule Modification Definition:**
-
    $$
    y_c \geq x_{ic} - s_i, \quad \forall c \in C, \forall i \in P
    $$
-
    $$
    y_c \geq s_i - x_{ic}, \quad \forall c \in C, \forall i \in P
    $$
 
 7. **Off-Plan Assignment Definition:**
-
    $$
    o_{ic} - x_{ic} + s_i = 0, \quad \forall i \in P, \forall c \in C
    $$
 
 8. **Deassignment Definition:**
-
    $$
    d_{ic} + s_i + x_{ic} = 0, \quad \forall i \in P, \forall c \in C
    $$
@@ -217,6 +219,7 @@ $$
 To efficiently solve this model with a large set of possible pairings, I would start with **column generation**. This technique begins with a restricted master problem (RMP) containing only a subset of pairings, then iteratively adds new pairings with reduced cost from a pricing subproblem until no more reduced cost is observed.
 
 For more complex scenarios, I might consider **Branch-and-Price**, **Heuristics**, or even **Parallel Computing** on a GPU.
+
 
 To compile and run the program, use the following commands:
 
