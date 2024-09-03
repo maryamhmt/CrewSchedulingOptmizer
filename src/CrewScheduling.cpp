@@ -41,11 +41,11 @@ void CrewScheduling::optimizeSchedule() {
 
    
 
-    // Create indicator matrix shows the flights in each pairing
-    std::vector<std::vector<int>> alpha(pairingCount, std::vector<int>(flightCount, 0));
+    // Create p matrix shows the flights in each pairing
+    std::vector<std::vector<int>> p(pairingCount, std::vector<int>(flightCount, 0));
     for (int i = 0; i < pairingCount; ++i) {
         for (int f : pairings[i].flights) {
-            alpha[i][f] = 1;
+            p[i][f] = 1;
         }
     }
 
@@ -78,7 +78,7 @@ void CrewScheduling::optimizeSchedule() {
         z.push_back(solver.MakeBoolVar("z_" + std::to_string(crew.id)));
     }
 
-    // Variable indicating if a pairing is modified
+    // Variable s indicating if a pairing is modified
     for (int i = 0; i < pairingCount; ++i) {
         s.push_back(solver.MakeBoolVar("s_" + std::to_string(i)));
     }
@@ -90,7 +90,7 @@ void CrewScheduling::optimizeSchedule() {
         operations_research::MPConstraint* flightCoverageConstraint = solver.MakeRowConstraint(0, 1);
         for (int i = 0; i < pairingCount; ++i) {
             for (int c = 0; c < crewList.size(); ++c) {
-                flightCoverageConstraint->SetCoefficient(x[c][i], alpha[i][f]);
+                flightCoverageConstraint->SetCoefficient(x[c][i], p[i][f]);
             }
         }
     }
@@ -163,7 +163,7 @@ void CrewScheduling::optimizeSchedule() {
         unassignedConstraint->SetCoefficient(unassigned, 1);
         for (int i = 0; i < pairingCount; ++i) {
             for (int c = 0; c < crewList.size(); ++c) {
-                unassignedConstraint->SetCoefficient(x[c][i], -alpha[i][f]);
+                unassignedConstraint->SetCoefficient(x[c][i], -p[i][f]);
             }
         }
         objective->SetCoefficient(unassigned, C_u);
