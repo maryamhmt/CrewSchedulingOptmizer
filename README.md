@@ -139,7 +139,7 @@ $$
 - **Two Pilots on a Flight:**
 
 $$
-\sum_{i \in P} \sum_{c \in C} \p_{if} x_{ic} \leq 2, \quad \forall f \in F
+\sum_{i \in P} \sum_{c \in C} p_{if} x_{ic} \leq 2, \quad \forall f \in F
 $$
 
 
