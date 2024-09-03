@@ -172,19 +172,19 @@ $$
 
 3. **Crew Assignment:**
 
-    $$
+   $$
    x_{ic} + x_{jc} \leq 1, \quad \forall c \in C, \forall i, j \in P \text{ where } [s_i, e_i] \cap [s_j, e_j] \neq \emptyset
    $$
 
 5. **Rest Periods:**
 
-    $$
+   $$
    e_i x_{ic} + 600 \leq s_j x_{jc} + M(2 - x_{ic} - x_{jc}), \quad \forall c \in C, \forall i, j \in P \text{ where } e_i < s_j
    $$
 
 7. **Cleared Schedules:**
 
-    $$
+   $$
    \sum_{c \in C} z_c \geq \lceil 0.2 \cdot |C| \rceil
    $$
 
