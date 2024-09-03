@@ -26,14 +26,22 @@ void CrewScheduling::optimizeSchedule() {
     std::cout << "Starting schedule optimization..." << std::endl;
 
     operations_research::MPSolver solver("CrewSchedulingSolver", operations_research::MPSolver::CBC_MIXED_INTEGER_PROGRAMMING);
-
+    
+    
+    // counting the number of covered flight, later we make sure all flights are covered within pairings 
     int pairingCount = pairings.size();
-    int flightCount = 0;
-    for (const auto& pairing : pairings) {
-        flightCount = std::max(flightCount, *std::max_element(pairing.flights.begin(), pairing.flights.end()) + 1);
+
+    for(const auto& paring : pairings){
+        for(const auto& flight : paring.flights){
+            assignedFlight.insert(flight);
+        }
     }
 
-    // Create alpha matrix
+    int flightCount = assignedFlight.size();
+
+   
+
+    // Create indicator matrix shows the flights in each pairing
     std::vector<std::vector<int>> alpha(pairingCount, std::vector<int>(flightCount, 0));
     for (int i = 0; i < pairingCount; ++i) {
         for (int f : pairings[i].flights) {
@@ -51,11 +59,11 @@ void CrewScheduling::optimizeSchedule() {
         }
     }
 
-    // Define variables
+    //variables x_ic= 1 if if pairing iis assigned to crew c, y_c = 1 if crew c's schedule is modifies and z_c =1 if crew c's schedule is cleared
     std::vector<std::vector<operations_research::MPVariable*>> x;
     std::vector<operations_research::MPVariable*> y, z, s;
 
-    // Variable for each crew and pairing
+    // Variable x for each crew and pairing
     for (const auto& crew : crewList) {
         std::vector<operations_research::MPVariable*> crewVars;
         for (int i = 0; i < pairingCount; ++i) {
@@ -64,7 +72,7 @@ void CrewScheduling::optimizeSchedule() {
         x.push_back(crewVars);
     }
 
-    // Variable for each crew schedule modification and clearing
+    // Variable y and z for each crew schedule modification and clearing
     for (const auto& crew : crewList) {
         y.push_back(solver.MakeBoolVar("y_" + std::to_string(crew.id)));
         z.push_back(solver.MakeBoolVar("z_" + std::to_string(crew.id)));

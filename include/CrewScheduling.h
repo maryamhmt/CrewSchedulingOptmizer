@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <set>
 
 struct CrewMember {
     int id;
@@ -25,10 +26,12 @@ struct Pairing {
         : id(id), startTime(start), endTime(end), flights(flights) {}
 };
 
+
 class CrewScheduling {
 public:
     std::vector<CrewMember> crewList;
     std::vector<Pairing> pairings;
+    std::set<int> assignedFlight;
 
     void setPairings(const std::vector<Pairing>& pairings);
     void setCosts(int C_u, int C_a, int C_d, int C_m);
