@@ -75,6 +75,7 @@ $$
 
 ##### Constraints
 
+
 1. **Flight Coverage:**
 
 $$
@@ -168,20 +169,21 @@ $$
 
 
 ### Constraints
-Same as constraint in the same model added to the following constraints:
+The same as constraint in the same model added to the following constraints:
+
 
 
 7. **Off-Plan Assignment Definition:**
  
-   $$
-   o_{ic} - x_{ic} + s_i = 0, \quad \forall i \in P, \forall c \in C
-   $$
+$$
+o_{ic} - x_{ic} + s_i = 0, \quad \forall i \in P, \forall c \in C
+$$
 
 8. **Deassignment Definition:**
 
-   $$
-   d_{ic} + s_i + x_{ic} = 0, \quad \forall i \in P, \forall c \in C
-   $$
+$$
+d_{ic} + s_i + x_{ic} = 0, \quad \forall i \in P, \forall c \in C
+$$
 
 ### Binary Constraints
 
