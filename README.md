@@ -148,7 +148,7 @@ $$
 \sum_{i \in P} \sum_{c \in C} p_{if} x_{ic} \leq 2, \quad \forall f \in F
 $$
 
-## Model Formulation2(Linear Obective function)
+## Model Formulation2
 
 ### Decision Variables
 
